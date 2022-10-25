@@ -2,7 +2,7 @@
 ## CrearUsuaris.ps1
 - Un script que permeti afegir usuaris al sistema des de terminal
 
-El programa demanara a l'usuari un nom d'usuari, nom comlpet i el creara.
+El programa demanara a l'usuari un nom d'usuari i contrasenya i el creara.
 
 
 ## CrearUsuarisCSV.ps1
