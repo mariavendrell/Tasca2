@@ -2,7 +2,7 @@
 ## CrearUsuaris.ps1
 - Un script que permeti afegir usuaris al sistema des de terminal
 
-El programa demanara a l'usuari un nom d'usuari i la contrasenya i ho creara.
+El programa demanara a l'usuari un nom d'usuari, nom comlpet i el creara.
 
 
 ## CrearUsuarisCSV.ps1
@@ -14,5 +14,3 @@ El fitxer csv ha de tenir el mateix format del fitxer que he pujat 'ProvaUsuaris
 
 ## GestioUsuaris.ps1
 - Un script que permeti gestionar els usuaris: ha d'indicar el nombre d'usuaris totals al sistema, comptes d'usuari creats recentment, usuaris que no van canviar la contrasenya, quins hi ha inactius i proposar esborrar-los.
-
-El programa ensenyara un menu al usuari i ell seleccionara l'opcio que neccesiti.

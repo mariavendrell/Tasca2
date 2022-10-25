@@ -1,10 +1,12 @@
+#Recolllir fitxer
 $Path = Read-Host "Path ubicació fitxer csv del usuaris -> "
 
+#Importar informació del csv
 $Usuaris = Import-Csv -Path $Path 
 
+#Insertar cada usuari del csv
 foreach ($Usuari in $Usuaris) {
     $NomUsuari = $Usuari.usuari
-    $NomComplet = $Usuari.'nom complet'
     $Contasenya = ConvertTo-SecureString $Usuari.contrasenya -AsPlainText -Force
-    New-LocalUser $NomUsuari -Password $Contasenya  -Fullname $NomComplet
+    New-ADUser -Name $NomUsuari -Accountpassword $Contasenya -Enabled $true
 }

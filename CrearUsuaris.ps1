@@ -1,6 +1,7 @@
+#Demanar dades del nou usuari
 Write-Output "Crear un usuari"
 $NomUsuari = Read-Host "Nom Usuari -> "
-$NomComplet = Read-Host "Nom Complet -> "
 $Contasenya = Read-Host "Contasenya -> " -AsSecureString
 
-New-LocalUser $NomUsuari -Password $Contasenya  -Fullname $NomComplet
+#Crem el nou usuari
+New-ADUser -Name $NomUsuari -Accountpassword $Contasenya -Enabled $true
