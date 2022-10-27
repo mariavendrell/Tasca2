@@ -10,7 +10,8 @@ $opcio = Read-Host " -> "
 
 switch ($opcio) {
     1 {
-        (Get-LocalUser | Select-Object Name).count
+        $total = (Get-ADUser -Filter * | Select-Object Name).count
+        Write-Output "Hi ha $total usuaris a aquest domini"
     }
     2 {
         $Days = 10
@@ -18,20 +19,20 @@ switch ($opcio) {
         Get-ADUser -Filter * -Property whenCreated | Where {$_.whenCreated -gt $Time} | ft Name, whenCreated
     }
     3 {
-        $Days = 10
-        $Time = (Get-Date).Adddays(-($Days))
-        Get-ADUser -Filter * -Property whenCreated | Where {$_.whenCreated -gt $Time} | ft Name, WhenCreated
+        $Days = 90
+        $Time = [DateTime]::Today.AddDays(-$Days)
+        Get-ADUser -Filter '(PasswordLastSet -lt $Time)' -Properties PasswordLastSet | ft Name,PasswordLastSet
     }
     4 {
-        $Days = 10
-        $Time = (Get-Date).Adddays(-($Days))
-        Get-ADUser -Filter {LastLogonTimeStamp -lt $Time} -Properties * | Select Name, LastLogonDate
+        $Days = 30
+        $Time = [DateTime]::Today.AddDays(-$Days)
+        Get-ADUser -Filter '(LastLogonTimeStamp -lt $Time)' -Properties LastLogonTimeStamp | ft Name, LastLogonDate
 
-        if ( (Get-ADUser| Select LastLogonTimeStamp) -lt 300 ) {
+        $Days = 90
+        $Time = [DateTime]::Today.AddDays(-$Days)
+        if ( (Get-ADUser -Filter '(LastLogonTimeStamp -lt $Time)') ) {
             Write-Output "Seria recomanable esborrar aquests usuaris:"
-            $Days = 300
-            $Time = (Get-Date).Adddays(-($Days))
-            Get-ADUser -Filter {LastLogonTimeStamp -lt $Time} -Properties * | Select Name, LastLogonDate
+            Get-ADUser -Filter '(LastLogonTimeStamp -lt $Time)' -Properties LastLogonTimeStamp | ft Name
         }
     }
 }
